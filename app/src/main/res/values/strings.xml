@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">PaisesTeste</string>
+    <string name="error_loading">Erro ao carregar produtos. Tente novamente.</string>
+    <string name="retry">Tentar Novamente</string>
+</resources>
