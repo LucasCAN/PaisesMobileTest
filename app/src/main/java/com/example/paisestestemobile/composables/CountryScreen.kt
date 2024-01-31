@@ -173,7 +173,7 @@ fun CountryDetailContent(viewModel: CountriesViewModel, country: Country?, it: P
                 )
                 Text(
                     modifier = Modifier.fillMaxWidth(),
-                    text = formatPopulation(country?.population) ?: "-",
+                    text = formatPopulation(country?.population) ,
                     fontSize = 18.sp,
                     fontWeight = FontWeight.Bold,
                     textAlign = TextAlign.Center
