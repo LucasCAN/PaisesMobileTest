@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -15,6 +16,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowCircleDown
@@ -41,6 +43,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.stringArrayResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -69,19 +72,7 @@ fun SearchScreen(navController: NavHostController, viewModel: CountriesViewModel
     var iconClean by remember {
         mutableStateOf(false)
     }
-    val languages = arrayListOf(
-        "English",
-        "French",
-        "Arabic",
-        "Spanish",
-        "Portuguese",
-        "Dutch",
-        "Chinese",
-        "German",
-        "Italian",
-        "Japanese",
-        "Russian"
-    )
+    val languages = stringArrayResource(id = R.array.languages_array)
     val sheetState = rememberModalBottomSheetState()
     var isSheetOpen by rememberSaveable {
         mutableStateOf(false)
@@ -97,6 +88,7 @@ fun SearchScreen(navController: NavHostController, viewModel: CountriesViewModel
                 modifier = Modifier
                     .align(Alignment.CenterVertically)
                     .weight(1f),
+                tonalElevation = 500.dp,
                 query = text,
                 onQueryChange = {
                     text = it
@@ -109,10 +101,10 @@ fun SearchScreen(navController: NavHostController, viewModel: CountriesViewModel
                     iconClean = true
                 },
                 placeholder = {
-                    Text(text = "Search country name")
+                    Text(text = stringResource(R.string.search_country_name))
                 },
                 leadingIcon = {
-                    Icon(imageVector = Icons.Default.Search, contentDescription = "Search Icon")
+                    Icon(imageVector = Icons.Default.Search, contentDescription = stringResource(R.string.search_icon))
                 },
                 trailingIcon = {
                     if (iconClean) {
@@ -122,23 +114,29 @@ fun SearchScreen(navController: NavHostController, viewModel: CountriesViewModel
                                     text = ""
                                 }
                             },
-                            imageVector = Icons.Default.Close, contentDescription = "Close Icon"
+                            imageVector = Icons.Default.Close, contentDescription = stringResource(R.string.close_icon)
                         )
                     }
                 }
             ) {}
 
-            IconButton(modifier = Modifier.align(Alignment.CenterVertically),
+            IconButton(modifier = Modifier
+                .padding(start = 8.dp, top = 8.dp)
+                .align(Alignment.CenterVertically)
+                .border(1.dp, Color.LightGray, CircleShape),
                 onClick = {
                     isSheetOpen = true
                 }) {
                 Icon(
                     modifier = Modifier
                         .size(35.dp),
-                    imageVector = Icons.Default.FilterList, contentDescription = "Filter"
+                    imageVector = Icons.Default.FilterList, contentDescription = stringResource(R.string.filter)
                 )
             }
         }
+
+        Divider(color = Color.LightGray, modifier = Modifier.fillMaxWidth())
+
         //Controle do bottomsheet para filtrar por idiomas
         if (isSheetOpen) {
             ModalBottomSheet(
@@ -151,7 +149,7 @@ fun SearchScreen(navController: NavHostController, viewModel: CountriesViewModel
                     fontSize = 18.sp,
                     color = Color.Black,
                     fontWeight = FontWeight.Bold,
-                    text = "Search countries by language",
+                    text = stringResource(R.string.search_countries_by_language),
                     textAlign = TextAlign.Center
                 )
                 Divider(color = Color.Gray, modifier = Modifier.fillMaxWidth())
@@ -259,7 +257,6 @@ fun CountryList(countries: List<Country>, onItemClick: (Country) -> Unit) {
         }
     }
 }
-
 @Composable
 fun CountryItem(country: Country, onItemClick: (Country) -> Unit) {
     Column(
@@ -271,7 +268,9 @@ fun CountryItem(country: Country, onItemClick: (Country) -> Unit) {
             SubcomposeAsyncImage(
                 model = country.flag?.get("png"),
                 loading = {
-                    CircularProgressIndicator(modifier = Modifier.size(32.dp))
+                    Box{
+                        CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
+                    }
                 },
                 contentDescription = null,
                 modifier = Modifier

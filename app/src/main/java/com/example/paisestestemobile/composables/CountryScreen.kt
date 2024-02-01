@@ -16,7 +16,6 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -29,12 +28,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import coil.compose.SubcomposeAsyncImage
+import com.example.paisestestemobile.R
+import com.example.paisestestemobile.components.DividerSpacer
 import com.example.paisestestemobile.data.countries.CountriesViewModel
 import com.example.paisestestemobile.model.Country
 import com.example.paisestestemobile.utils.formatArea
@@ -45,7 +47,6 @@ import com.example.paisestestemobile.utils.formatPopulation
 fun CountryScreen(navController: NavHostController, viewModel: CountriesViewModel) {
     val country = viewModel.countriesUIState.value.selectedCountry
 
-
     Scaffold(
         topBar = {
             TopAppBar(
@@ -54,19 +55,24 @@ fun CountryScreen(navController: NavHostController, viewModel: CountriesViewMode
                     IconButton(onClick = {
                         navController.navigateUp()
                     }) {
-                        Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "Go back")
+                        Icon(
+                            imageVector = Icons.Default.ArrowBack,
+                            contentDescription = stringResource(
+                                R.string.go_back
+                            )
+                        )
                     }
                 }
             )
         },
         content = {
-            CountryDetailContent(viewModel, country, it)
+            CountryDetailContent(country, it)
         },
     )
 }
 
 @Composable
-fun CountryDetailContent(viewModel: CountriesViewModel, country: Country?, it: PaddingValues) {
+fun CountryDetailContent(country: Country?, it: PaddingValues) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -103,16 +109,16 @@ fun CountryDetailContent(viewModel: CountriesViewModel, country: Country?, it: P
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
 
-                Spacer(modifier = Modifier.height(8.dp))
-                Divider(color = Color.Gray, modifier = Modifier.fillMaxWidth())
-                Spacer(modifier = Modifier.height(8.dp))
+                DividerSpacer()
 
                 Text(
-                    text = "Common name",
+                    text = stringResource(R.string.common_name),
                     fontSize = 18.sp,
                     color = Color.Black,
                     textAlign = TextAlign.Center,
-                    modifier = Modifier.padding(5.dp).fillMaxWidth()
+                    modifier = Modifier
+                        .padding(5.dp)
+                        .fillMaxWidth()
                 )
                 Text(
                     modifier = Modifier.fillMaxWidth(),
@@ -122,16 +128,16 @@ fun CountryDetailContent(viewModel: CountriesViewModel, country: Country?, it: P
                     textAlign = TextAlign.Center
                 )
 
-                Spacer(modifier = Modifier.height(8.dp))
-                Divider(color = Color.Gray, modifier = Modifier.fillMaxWidth())
-                Spacer(modifier = Modifier.height(8.dp))
+                DividerSpacer()
 
                 Text(
-                    text = "Official name",
+                    text = stringResource(R.string.official_name),
                     fontSize = 18.sp,
                     color = Color.Black,
                     textAlign = TextAlign.Center,
-                    modifier = Modifier.padding(5.dp).fillMaxWidth()
+                    modifier = Modifier
+                        .padding(5.dp)
+                        .fillMaxWidth()
                 )
                 Text(
                     modifier = Modifier.fillMaxWidth(),
@@ -141,54 +147,54 @@ fun CountryDetailContent(viewModel: CountriesViewModel, country: Country?, it: P
                     textAlign = TextAlign.Center
                 )
 
-                Spacer(modifier = Modifier.height(8.dp))
-                Divider(color = Color.Gray, modifier = Modifier.fillMaxWidth())
-                Spacer(modifier = Modifier.height(8.dp))
+                DividerSpacer()
 
                 Text(
-                    text = "Area",
+                    text = stringResource(R.string.area),
                     fontSize = 18.sp,
                     color = Color.Black,
                     textAlign = TextAlign.Center,
-                    modifier = Modifier.padding(5.dp).fillMaxWidth()
+                    modifier = Modifier
+                        .padding(5.dp)
+                        .fillMaxWidth()
                 )
                 Text(
                     modifier = Modifier.fillMaxWidth(),
-                    text = formatArea(country?.area) + " km²",
+                    text = formatArea(country?.area) + stringResource(R.string.km),
                     fontSize = 18.sp,
                     fontWeight = FontWeight.Bold,
                     textAlign = TextAlign.Center
                 )
 
-                Spacer(modifier = Modifier.height(8.dp))
-                Divider(color = Color.Gray, modifier = Modifier.fillMaxWidth())
-                Spacer(modifier = Modifier.height(8.dp))
+                DividerSpacer()
 
                 Text(
-                    text = "Population",
+                    text = stringResource(R.string.population),
                     fontSize = 18.sp,
                     color = Color.Black,
                     textAlign = TextAlign.Center,
-                    modifier = Modifier.padding(5.dp).fillMaxWidth()
+                    modifier = Modifier
+                        .padding(5.dp)
+                        .fillMaxWidth()
                 )
                 Text(
                     modifier = Modifier.fillMaxWidth(),
-                    text = formatPopulation(country?.population) ,
+                    text = formatPopulation(country?.population),
                     fontSize = 18.sp,
                     fontWeight = FontWeight.Bold,
                     textAlign = TextAlign.Center
                 )
 
-                Spacer(modifier = Modifier.height(8.dp))
-                Divider(color = Color.Gray, modifier = Modifier.fillMaxWidth())
-                Spacer(modifier = Modifier.height(8.dp))
+                DividerSpacer()
 
                 Text(
-                    text = "Continents",
+                    text = stringResource(R.string.continents),
                     fontSize = 18.sp,
                     color = Color.Black,
                     textAlign = TextAlign.Center,
-                    modifier = Modifier.padding(5.dp).fillMaxWidth()
+                    modifier = Modifier
+                        .padding(5.dp)
+                        .fillMaxWidth()
                 )
                 Text(
                     modifier = Modifier.fillMaxWidth(),
@@ -198,16 +204,16 @@ fun CountryDetailContent(viewModel: CountriesViewModel, country: Country?, it: P
                     textAlign = TextAlign.Center
                 )
 
-                Spacer(modifier = Modifier.height(8.dp))
-                Divider(color = Color.Gray, modifier = Modifier.fillMaxWidth())
-                Spacer(modifier = Modifier.height(8.dp))
+                DividerSpacer()
 
                 Text(
-                    text = "Languages",
+                    text = stringResource(R.string.languages),
                     fontSize = 18.sp,
                     color = Color.Black,
                     textAlign = TextAlign.Center,
-                    modifier = Modifier.padding(5.dp).fillMaxWidth()
+                    modifier = Modifier
+                        .padding(5.dp)
+                        .fillMaxWidth()
                 )
                 Text(
                     modifier = Modifier.fillMaxWidth(),
@@ -217,9 +223,7 @@ fun CountryDetailContent(viewModel: CountriesViewModel, country: Country?, it: P
                     textAlign = TextAlign.Center
                 )
 
-                Spacer(modifier = Modifier.height(8.dp))
-                Divider(color = Color.Gray, modifier = Modifier.fillMaxWidth())
-                Spacer(modifier = Modifier.height(8.dp))
+                DividerSpacer()
             }
         }
     }
