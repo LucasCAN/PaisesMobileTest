@@ -4,12 +4,15 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -65,4 +68,11 @@ fun ButtonComponent(value: String, onButtonClicked: () -> Unit, isEnabled: Boole
         }
 
     }
+}
+
+@Composable
+fun DividerSpacer() {
+    Spacer(modifier = Modifier.height(8.dp))
+    Divider(color = Color.LightGray, modifier = Modifier.fillMaxWidth())
+    Spacer(modifier = Modifier.height(8.dp))
 }

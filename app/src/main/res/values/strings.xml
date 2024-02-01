@@ -2,4 +2,17 @@
     <string name="app_name">PaisesTeste</string>
     <string name="error_loading">Erro ao carregar produtos. Tente novamente.</string>
     <string name="retry">Tentar Novamente</string>
+    <string name="go_back">Go back</string>
+    <string name="common_name">Common name</string>
+    <string name="official_name">Official name</string>
+    <string name="area">Area</string>
+    <string name="km">" km²"</string>
+    <string name="population">Population</string>
+    <string name="continents">Continents</string>
+    <string name="languages">Languages</string>
+    <string name="search_country_name">Search country name</string>
+    <string name="search_icon">Search Icon</string>
+    <string name="close_icon">Close Icon</string>
+    <string name="filter">Filter</string>
+    <string name="search_countries_by_language">Search countries by language</string>
 </resources>
